@@ -1,100 +1,133 @@
-# HealthAI Chatbot (Streamlit)
+# HealthAI Bot 🩺🤖
 
-A sleek, dark-themed health assistant chatbot built with **Streamlit**. It calls the **OpenRouter** Chat Completions API and supports **multiple languages** (English, Hindi, Marathi, Gujarati, Rajasthani). The sidebar is fixed open (static) and exposes controls for **temperature** and **language**.
+An AI-powered healthcare assistant that answers real-time medical queries and provides conversational support to users, built with OpenAI's models and a Streamlit frontend.
 
-> ⚠️ This app provides general wellness information and is **not a substitute for professional medical advice**.
-
----
-
-## Features
-- 🩺 Short, practical guidance on common symptoms/conditions
-- 🌿 Includes Ayurvedic options (with cautions)
-- 🌍 Multilingual answers (English/Hindi/Marathi/Gujarati/Rajasthani)
-- 🎛️ Static sidebar (temperature + language)
-- 🔒 API key stored safely in `secrets.toml` (or environment variable)
+🔗 **Live App:** [healthai-bot-abhishekakurhade.streamlit.app](https://healthai-bot-abhishekakurhade.streamlit.app/)
 
 ---
 
-## 1) Local Setup
+## 📌 Overview
+
+HealthAI Bot is a conversational chatbot designed to make basic healthcare information more accessible. It integrates OpenAI's language models with a simple, interactive Streamlit UI, allowing users to ask medical questions and receive helpful, real-time responses.
+
+---
+
+## 🛠️ Tech Stack
+
+| Category         | Tools / Technologies        |
+|-------------------|------------------------------|
+| Language          | Python                      |
+| AI / ML           | OpenAI API                  |
+| Frontend          | Streamlit                   |
+| CI/CD             | Jenkins                     |
+| Containerization  | Docker                      |
+| Cloud / Infra     | AWS EC2                     |
+| Version Control   | Git, GitHub                 |
+
+---
+
+## 🚀 Features
+
+- Real-time conversational responses to healthcare-related queries
+- Simple, interactive Streamlit-based chat interface
+- Integrated with OpenAI's models for natural language understanding
+- Fully automated build and deployment pipeline via Jenkins
+
+---
+
+## ⚙️ CI/CD Pipeline (Jenkins)
+
+The project uses a Jenkins pipeline to automate the build and deployment process. The pipeline runs in **3 stages**:
+
+1. **Clone the Code** – Pulls the latest code from this GitHub repository
+2. **Build the Code** – Installs dependencies and builds the Docker image
+3. **Push Image** – Pushes the built Docker image to the container registry
+
+**Pipeline stage view:**
+
+![Jenkins Pipeline Stages](./screenshots/jenkins-pipeline.jpg)
+
+---
+
+## ☁️ Infrastructure (AWS EC2)
+
+The Jenkins CI/CD setup runs on a **Master-Agent architecture** hosted on **AWS EC2**:
+
+- **`jenkinserver`** – Jenkins master node, orchestrates the pipeline
+- **`jenkin-node`** – Jenkins build agent, executes pipeline jobs
+
+Both instances run on `t3.micro` EC2 instances in the `us-east-1` region.
+
+**EC2 instance dashboard:**
+
+![AWS EC2 Instances](./screenshots/ec2-instances.jpg)
+
+---
+
+## 📂 Project Structure
+
+```
+HealthAI-Bot/
+├── app.py                # Streamlit application entry point
+├── requirements.txt      # Python dependencies
+├── Dockerfile            # Container build instructions
+├── Jenkinsfile           # CI/CD pipeline definition
+└── README.md             # Project documentation
+```
+
+---
+
+## ▶️ Getting Started
 
 ### Prerequisites
-- Python 3.9–3.11
-- A terminal (Command Prompt / PowerShell / bash)
+- Python 3.8+
+- OpenAI API key
+- Docker (optional, for containerized deployment)
+- Jenkins (optional, for CI/CD)
 
-### Clone / Copy your project
-Put your `Healthai.py` in the project root, e.g.
-```
-health-bot/
-├─ Healthai.py
-└─ .streamlit/
-   └─ secrets.toml
-```
+### Installation
 
-### Create virtual environment (recommended)
 ```bash
-python -m venv .venv
-# Windows
-.venv\Scripts\activate
-# macOS/Linux
-source .venv/bin/activate
-```
+# Clone the repository
+git clone https://github.com/abhishekakurhade/HealthAI-Bot.git
+cd HealthAI-Bot
 
-### Install dependencies
-```bash
+# Install dependencies
 pip install -r requirements.txt
+
+# Set your OpenAI API key
+export OPENAI_API_KEY="your-api-key-here"
+
+# Run the app
+streamlit run app.py
 ```
 
-### Configure secrets
-Create a file at **`.streamlit/secrets.toml`**:
+### Run with Docker
 
-```toml
-OPENROUTER_API_KEY = "sk-or-v1-REPLACE_WITH_YOUR_REAL_KEY"
-```
-
-> Alternatively, you can set an environment variable:
-> - Windows (PowerShell): `setx OPENROUTER_API_KEY "sk-or-v1-..."`
-> - macOS/Linux (bash): `export OPENROUTER_API_KEY="sk-or-v1-..."`
-
-### Run the app
 ```bash
-streamlit run Healthai.py
-```
-Open the URL shown in the terminal (usually http://localhost:8501).
-
----
-
-## 2) Docker
-
-### Build
-```bash
-docker build -t healthai-chatbot .
-```
-
-### Run (with secrets)
-The easiest way is to **mount** a local `.streamlit` directory that contains your `secrets.toml`:
-```bash
-docker run --rm -p 8501:8501   -v ${PWD}/.streamlit:/app/.streamlit   --name healthai healthai-chatbot
-```
-> On Windows PowerShell, use `${PWD}`. On cmd.exe, use `%cd%`.
-
-Now open: http://localhost:8501
-
-#### .dockerignore (optional but recommended)
-Create a `.dockerignore` file to keep the image small:
-```
-.venv
-__pycache__
-*.pyc
-*.pyo
-*.pyd
-.git
-.gitignore
-.streamlit/secrets.toml
+docker build -t healthai-bot .
+docker run -p 8501:8501 healthai-bot
 ```
 
 ---
 
+## 🔄 CI/CD Workflow Summary
 
+```
+GitHub Push → Jenkins (Clone → Build → Push Image) → Docker Image → Deployment
+```
 
+Every code change pushed to the repository triggers the Jenkins pipeline, which builds a fresh Docker image and pushes it to the registry — enabling fast, consistent, and repeatable deployments.
 
+---
 
+## 📈 Outcome
+
+Successfully deployed an AI-driven healthcare chatbot with a fully automated CI/CD pipeline, improving accessibility to basic healthcare information and demonstrating end-to-end DevOps practices (Jenkins + Docker + AWS EC2).
+
+---
+
+## 👤 Author
+
+**Abhishek Akurhade**
+AI/ML Developer — integrated OpenAI models with Streamlit and implemented CI/CD automation using Jenkins on AWS EC2.
