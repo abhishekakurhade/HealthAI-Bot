@@ -13,7 +13,7 @@ RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY Healthai.py /healthbot/Healthai.py
-COPY voice.py   /healthbot/voice.py
+// COPY voice.py   /healthbot/voice.py
 COPY chat_history.json /healthbot/chat_history.json
 
 
