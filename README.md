@@ -45,7 +45,7 @@ The project uses a Jenkins pipeline to automate the build and deployment process
 
 **Pipeline stage view:**
 
-![Jenkins Pipeline Stages](./screenshot/healthai jenkin stages.jpg)
+![Jenkins Pipeline Stages](screenshot/healthai jenkin stages.jpg)
 
 ---
 
