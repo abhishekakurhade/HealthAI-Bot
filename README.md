@@ -60,7 +60,7 @@ Both instances run on `t3.micro` EC2 instances in the `us-east-1` region.
 
 **EC2 instance dashboard:**
 
-![AWS EC2 Instances](./screenshots/ec2-instances.jpg)
+![AWS EC2 Instances](screenshot/sever.jpg)
 
 ---
 
