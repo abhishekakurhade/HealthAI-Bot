@@ -1,5 +1,5 @@
 pipeline{
-    agent {label "jenkins-node"}
+    agent {label "jenkins-worker"}
     
     stages{
         stage ("clone the code"){
