@@ -1,4 +1,4 @@
-# HealthAI Bot 🩺🤖
+# HealthAI Bot 🩺🤖 #
 
 An AI-powered healthcare assistant that answers real-time medical queries and provides conversational support to users, built with OpenAI's models and a Streamlit frontend.
 
