@@ -8,7 +8,7 @@ An AI-powered healthcare assistant that answers real-time medical queries and pr
 
 ## 📌 Overview
 
-HealthAI Bot is a conversational chatbot designed to make basic healthcare information more accessible. It integrates OpenAI's language models with a simple, interactive Streamlit UI, allowing users to ask medical questions and receive helpful, real-time responses.
+HealthAI Bot is a conversational chatbot designed to make basic healthcare information more accessible. It integrates OpenAI's language models with a simple, interactive Streamlit UI, allowing users to ask medical questions and receive helpful, real-time responses..
 
 ---
 
