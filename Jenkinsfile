@@ -11,7 +11,7 @@ pipeline{
         stage ("build the code"){
             steps{
                 echo "build image of portfolio"
-                sh "docker build -t abhishekakurhade/healthai:05 ."
+                sh "docker build -t abhishekakurhade/healthai:06 ."
             }
         }
         stage ("push image"){
@@ -28,7 +28,7 @@ pipeline{
             
             echo "Pushing the image..."
             // 3. Push your image to your repository
-            sh "docker push abhishekakurhade/healthai:05"
+            sh "docker push abhishekakurhade/healthai:06"
             
             echo "Logging out..."
             // 4. Clean up the session
