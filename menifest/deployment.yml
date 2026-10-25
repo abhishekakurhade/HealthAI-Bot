@@ -18,6 +18,6 @@ spec:
         - name: healthai-container
           images: abhishekakurhade/healthai:7
           ports:
-            - containerPort: 80
+            - containerPort: 8501
         
         
