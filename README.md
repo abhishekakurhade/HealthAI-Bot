@@ -1,133 +1,184 @@
-# HealthAI Bot 🩺🤖 #
+# 🩺 HealthAI-Bot
 
-An AI-powered healthcare assistant that answers real-time medical queries and provides conversational support to users, built with OpenAI's models and a Streamlit frontend.
+A Streamlit-based AI health assistant (voice + text) powered by OpenRouter (`openai/gpt-3.5-turbo`), containerised with Docker and deployed to **Amazon EKS** through a **Jenkins CI/CD pipeline**.
 
-🔗 **Live App:** [healthai-bot-abhishekakurhade.streamlit.app](https://healthai-bot-abhishekakurhade.streamlit.app/)
-
----
-
-## 📌 Overview
-
-HealthAI Bot is a conversational chatbot designed to make basic healthcare information more accessible. It integrates OpenAI's language models with a simple, interactive Streamlit UI, allowing users to ask medical questions and receive helpful, real-time responses..
+> ⚠️ This bot is not a substitute for a doctor.
 
 ---
 
-## 🛠️ Tech Stack
+## 🏗️ Architecture
 
-| Category         | Tools / Technologies        |
-|-------------------|------------------------------|
-| Language          | Python                      |
-| AI / ML           | OpenAI API                  |
-| Frontend          | Streamlit                   |
-| CI/CD             | Jenkins                     |
-| Containerization  | Docker                      |
-| Cloud / Infra     | AWS EC2                     |
-| Version Control   | Git, GitHub                 |
+![Architecture](images/architecture.svg)
+
+**Flow:** Developer pushes to GitHub → Jenkins (EC2) clones, builds and pushes the Docker image to Docker Hub → `kubectl apply` deploys to EKS → a Classic Load Balancer exposes the Streamlit app to users → the app calls the OpenRouter API for LLM responses.
 
 ---
 
-## 🚀 Features
+## 🧰 Tech Stack
 
-- Real-time conversational responses to healthcare-related queries
-- Simple, interactive Streamlit-based chat interface
-- Integrated with OpenAI's models for natural language understanding
-- Fully automated build and deployment pipeline via Jenkins
-
----
-
-## ⚙️ CI/CD Pipeline (Jenkins)
-
-The project uses a Jenkins pipeline to automate the build and deployment process. The pipeline runs in **3 stages**:
-
-1. **Clone the Code** – Pulls the latest code from this GitHub repository
-2. **Build the Code** – Installs dependencies and builds the Docker image
-3. **Push Image** – Pushes the built Docker image to the container registry
-
-**Pipeline stage view:**
-
-![Jenkins Pipeline Stages](screenshot/jenkin-stages.jpg)
+| Layer | Tool |
+|---|---|
+| App | Streamlit (Python) |
+| LLM | OpenRouter API (`openai/gpt-3.5-turbo`) |
+| Container | Docker, Docker Hub |
+| CI/CD | Jenkins |
+| Orchestration | Amazon EKS (created with `eksctl`) |
+| Networking | VPC, Public/Private Subnets, IGW, NAT Gateway, Classic Load Balancer |
+| Region | `ap-south-1` (Mumbai) |
 
 ---
 
-## ☁️ Infrastructure (AWS EC2)
+## 🔄 Jenkins CI/CD Pipeline
 
-The Jenkins CI/CD setup runs on a **Master-Agent architecture** hosted on **AWS EC2**:
+The pipeline (`healthai-bot`, build #9) has four stages:
 
-- **`jenkinserver`** – Jenkins master node, orchestrates the pipeline
-- **`jenkin-node`** – Jenkins build agent, executes pipeline jobs
+1. **Clone code** – checks out `main` from GitHub
+2. **Build image** – `docker build -t $IMAGE:$TAG .`
+3. **Push image** – pushes `healthai-bot:<BUILD_NUMBER>` to Docker Hub
+4. **Deploy to EKS** – updates the image tag in `menifest/deployment.yml` with `sed`, applies `deployment.yml` and `service.yml`, then runs `kubectl rollout status deployment --timeout=120s`
 
-Both instances run on `t3.micro` EC2 instances in the `us-east-1` region.
-
-**EC2 instance dashboard:**
-
-![AWS EC2 Instances](screenshot/sever.jpg)
+![Jenkins Pipeline](images/jenkin-pipeline.jpg)
 
 ---
 
-## 📂 Project Structure
+## ☸️ EKS Cluster & Kubernetes Resources
 
-```
-HealthAI-Bot/
-├── app.py                # Streamlit application entry point
-├── requirements.txt      # Python dependencies
-├── Dockerfile            # Container build instructions
-├── Jenkinsfile           # CI/CD pipeline definition
-└── README.md             # Project documentation
-```
+Cluster `cluster01` in `ap-south-1` with a managed node group (2 × `c7i-flex.large`). The deployment runs 2 replicas behind a `LoadBalancer` service (port 80 → NodePort 31439 → container port 8501).
+
+![EKS Cluster](images/eks-cluster.jpg)
 
 ---
 
-## ▶️ Getting Started
+## 🖥️ EC2 Instances
 
-### Prerequisites
-- Python 3.8+
-- OpenAI API key
-- Docker (optional, for containerized deployment)
-- Jenkins (optional, for CI/CD)
+Three instances are running: the Jenkins server (`healthai-project`, `m7i-flex.large`, ap-south-1c) and two EKS worker nodes (`c7i-flex.large`, ap-south-1a and ap-south-1b).
 
-### Installation
+![EC2 Instances](images/instances.jpg)
+
+---
+
+## 📈 Auto Scaling Group
+
+The EKS node group is backed by an Auto Scaling Group (min 2, desired 2, max 2) – 2/2 instances healthy.
+
+![Auto Scaling Group](images/autoscaling.jpg)
+
+---
+
+## 🌐 VPC Network
+
+`eksctl` created a VPC with 6 subnets (public + private in each of 1a, 1b, 1c), 5 route tables, an Internet Gateway and a NAT Gateway.
+
+![VPC Workflow](images/vpc-workflow.jpg)
+
+---
+
+## ⚖️ Load Balancer
+
+A Classic Load Balancer spanning 3 Availability Zones is created automatically by the Kubernetes `LoadBalancer` service.
+
+![Load Balancer](images/load-balancer.jpg)
+
+---
+
+## 🚀 Live Application
+
+The app is reachable through the load balancer DNS name. It offers a voice input ("Tap to Speak"), a text box, and optional info cards for Diet / Exercise / Symptoms.
+
+![Application View](images/application-view.jpg)
+
+---
+
+## ▶️ Run Locally
 
 ```bash
-# Clone the repository
 git clone https://github.com/abhishekakurhade/HealthAI-Bot.git
 cd HealthAI-Bot
-
-# Install dependencies
 pip install -r requirements.txt
-
-# Set your OpenAI API key
-export OPENAI_API_KEY="your-api-key-here"
-
-# Run the app
+export OPENROUTER_API_KEY=<your-key>
 streamlit run app.py
 ```
 
-### Run with Docker
+## 🐳 Docker
 
 ```bash
 docker build -t healthai-bot .
-docker run -p 8501:8501 healthai-bot
+docker run -p 8501:8501 -e OPENROUTER_API_KEY=<your-key> healthai-bot
+```
+
+> Adjust file names / env variable names above to match your repo.
+
+---
+
+## ☁️ Install eksctl
+
+Run these on the Jenkins/EC2 server (Ubuntu). The AWS CLI and `kubectl` must be installed and the server needs an IAM role (or `aws configure` credentials) with permissions for EKS, EC2, IAM and CloudFormation.
+
+```bash
+# Download and install eksctl
+ARCH=amd64
+PLATFORM=$(uname -s)_$ARCH
+curl -sLO "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_$PLATFORM.tar.gz"
+tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
+sudo mv /tmp/eksctl /usr/local/bin
+
+# Verify
+eksctl version
 ```
 
 ---
 
-## 🔄 CI/CD Workflow Summary
+## ☸️ Create EKS Cluster and Node Group
 
+**1. Create the cluster (control plane + VPC, without worker nodes):**
+
+```bash
+eksctl create cluster \
+  --name cluster01 \
+  --region ap-south-1 \
+  --without-nodegroup
 ```
-GitHub Push → Jenkins (Clone → Build → Push Image) → Docker Image → Deployment
+
+**2. Create a managed node group (2 × c7i-flex.large):**
+
+```bash
+eksctl create nodegroup \
+  --cluster cluster01 \
+  --region ap-south-1 \
+  --name node-group \
+  --node-type c7i-flex.large \
+  --nodes 2 \
+  --nodes-min 2 \
+  --nodes-max 2 \
+  --managed
 ```
 
-Every code change pushed to the repository triggers the Jenkins pipeline, which builds a fresh Docker image and pushes it to the registry — enabling fast, consistent, and repeatable deployments.
+**3. Connect kubectl to the cluster and verify:**
 
----
+```bash
+aws eks update-kubeconfig --name cluster01 --region ap-south-1
 
-## 📈 Outcome
+eksctl get cluster
+eksctl get nodegroup --cluster cluster01
+kubectl get nodes
+```
 
-Successfully deployed an AI-driven healthcare chatbot with a fully automated CI/CD pipeline, improving accessibility to basic healthcare information and demonstrating end-to-end DevOps practices (Jenkins + Docker + AWS EC2).
+**4. Deploy the app manually (Jenkins does this automatically on each build):**
+
+```bash
+kubectl apply -f menifest/deployment.yml -n default
+kubectl apply -f menifest/service.yml -n default
+kubectl get all
+```
+
+**Clean up (to avoid AWS charges):**
+
+```bash
+eksctl delete cluster --name cluster01 --region ap-south-1
+```
 
 ---
 
 ## 👤 Author
 
-**Abhishek Akurhade**
-AI/ML Developer — integrated OpenAI models with Streamlit and implemented CI/CD automation using Jenkins on AWS EC2.
+**Abhishek Kurhade** – [GitHub](https://github.com/abhishekakurhade)
