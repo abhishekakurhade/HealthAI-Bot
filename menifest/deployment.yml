@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: healthai-container
-          images: abhishekakurhade/healthai:7
+          images: abhishekakurhade/healthai-bot:IMAGE_TAG
           ports:
             - containerPort: 8501
         
