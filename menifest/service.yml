@@ -8,6 +8,6 @@ spec:
   selector:
     app: healthAI
   ports:
-    protocol: TCP
-      - port: 80
-        targetPort: 8501
+    - protocol: TCP
+      port: 80
+      targetPort: 8501
