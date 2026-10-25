@@ -1,0 +1,266 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1260 860" width="1260" height="860" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="gOr" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#c8511b"/><stop offset="1" stop-color="#ff9900"/></linearGradient>
+    <linearGradient id="gPu" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#4d27a8"/><stop offset="1" stop-color="#a166ff"/></linearGradient>
+    <linearGradient id="gBl" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#2e27ad"/><stop offset="1" stop-color="#527fff"/></linearGradient>
+
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#333"/></marker>
+    <marker id="aB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#2563eb"/></marker>
+    <marker id="aP" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#9333ea"/></marker>
+
+    <!-- EC2 icon -->
+    <g id="ec2">
+      <rect width="40" height="40" rx="4" fill="url(#gOr)"/>
+      <rect x="11" y="11" width="18" height="18" fill="none" stroke="#fff" stroke-width="2"/>
+      <path d="M15 7v4M20 7v4M25 7v4M15 29v4M20 29v4M25 29v4M7 15h4M7 20h4M7 25h4M29 15h4M29 20h4M29 25h4" stroke="#fff" stroke-width="1.6"/>
+    </g>
+    <!-- Load balancer icon -->
+    <g id="elb">
+      <circle cx="0" cy="0" r="22" fill="url(#gPu)"/>
+      <circle cx="-9" cy="0" r="4" fill="none" stroke="#fff" stroke-width="2"/>
+      <circle cx="9" cy="-9" r="3" fill="#fff"/><circle cx="9" cy="0" r="3" fill="#fff"/><circle cx="9" cy="9" r="3" fill="#fff"/>
+      <path d="M-5 0 L6 -9 M-5 0 L6 0 M-5 0 L6 9" stroke="#fff" stroke-width="1.6"/>
+    </g>
+    <!-- Internet gateway icon -->
+    <g id="igw">
+      <circle cx="0" cy="0" r="18" fill="#fff" stroke="#8c4fff" stroke-width="2"/>
+      <path d="M-8 9 V-2 a8 8 0 0 1 16 0 V9" fill="none" stroke="#8c4fff" stroke-width="2.4"/>
+      <path d="M-3 9 V-1 a3 3 0 0 1 6 0 V9" fill="none" stroke="#8c4fff" stroke-width="2"/>
+    </g>
+    <!-- NAT gateway icon -->
+    <g id="nat">
+      <circle cx="0" cy="0" r="18" fill="#fff" stroke="#8c4fff" stroke-width="2"/>
+      <path d="M-9 -4 H6 M2 -8 L6 -4 L2 0 M9 5 H-6 M-2 1 L-6 5 L-2 9" fill="none" stroke="#8c4fff" stroke-width="2"/>
+    </g>
+    <!-- small ASG badge -->
+    <g id="asg"><rect width="16" height="16" rx="2" fill="#ed7100"/><rect x="4" y="4" width="8" height="8" fill="none" stroke="#fff" stroke-width="1.5"/></g>
+
+    <style>
+      .h  { font-size:13px; font-weight:600; fill:#232f3e; }
+      .t  { font-size:12px; fill:#232f3e; }
+      .s  { font-size:11px; fill:#545b64; }
+      .l  { font-size:11px; fill:#333; }
+      .ar { stroke:#333; stroke-width:1.4; fill:none; marker-end:url(#a); }
+      .ab { stroke:#2563eb; stroke-width:1.4; fill:none; marker-end:url(#aB); stroke-dasharray:5 4; }
+      .ap { stroke:#9333ea; stroke-width:1.4; fill:none; marker-end:url(#aP); stroke-dasharray:5 4; }
+    </style>
+  </defs>
+
+  <rect width="1260" height="860" fill="#ffffff"/>
+
+  <!-- ===================== OUTSIDE (left) ===================== -->
+  <!-- Developer -->
+  <g transform="translate(100,80)">
+    <circle cx="0" cy="-12" r="8" fill="none" stroke="#232f3e" stroke-width="1.6"/>
+    <path d="M-14 12 a14 12 0 0 1 28 0" fill="none" stroke="#232f3e" stroke-width="1.6"/>
+  </g>
+  <text x="100" y="112" text-anchor="middle" class="h">Developer</text>
+
+  <!-- GitHub -->
+  <rect x="35" y="160" width="130" height="58" rx="8" fill="#f6f8fa" stroke="#24292f"/>
+  <circle cx="58" cy="189" r="12" fill="#24292f"/>
+  <text x="58" y="193" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">GH</text>
+  <text x="78" y="185" class="h">GitHub</text>
+  <text x="78" y="202" class="s">HealthAI-Bot</text>
+  <text x="78" y="214" class="s">branch: main</text>
+
+  <!-- Docker Hub -->
+  <rect x="35" y="272" width="130" height="66" rx="8" fill="#eaf5fd" stroke="#2496ed"/>
+  <rect x="46" y="281" width="22" height="22" rx="4" fill="#2496ed"/>
+  <path d="M50 293h14M50 297h14" stroke="#fff" stroke-width="2"/>
+  <text x="74" y="297" class="h">Docker Hub</text>
+  <text x="46" y="318" class="s">healthai-bot:</text>
+  <text x="46" y="331" class="s">&lt;BUILD_NUMBER&gt;</text>
+
+  <!-- Users -->
+  <g transform="translate(100,422)">
+    <circle cx="-7" cy="-12" r="7" fill="none" stroke="#232f3e" stroke-width="1.6"/>
+    <path d="M-19 10 a12 11 0 0 1 24 0" fill="none" stroke="#232f3e" stroke-width="1.6"/>
+    <circle cx="8" cy="-9" r="6" fill="none" stroke="#232f3e" stroke-width="1.4"/>
+    <path d="M4 3 a10 9 0 0 1 16 4" fill="none" stroke="#232f3e" stroke-width="1.4"/>
+  </g>
+  <text x="100" y="455" text-anchor="middle" class="h">Users</text>
+  <text x="100" y="470" text-anchor="middle" class="s">browser</text>
+
+  <!-- OpenRouter -->
+  <rect x="35" y="540" width="130" height="62" rx="8" fill="#f5f0ff" stroke="#8c4fff"/>
+  <text x="100" y="564" text-anchor="middle" class="h">OpenRouter API</text>
+  <text x="100" y="580" text-anchor="middle" class="s">openai/</text>
+  <text x="100" y="593" text-anchor="middle" class="s">gpt-3.5-turbo</text>
+
+  <!-- ===================== AWS CLOUD ===================== -->
+  <rect x="200" y="40" width="1040" height="800" rx="10" fill="none" stroke="#232f3e" stroke-width="1.4"/>
+  <text x="216" y="64" font-size="17" font-weight="600" fill="#232f3e">AWS Cloud · ap-south-1 (Mumbai)</text>
+
+  <!-- Default VPC with Jenkins -->
+  <rect x="230" y="82" width="980" height="146" rx="6" fill="#f2f7fd" stroke="#5a8dd6"/>
+  <text x="244" y="100" class="t" fill="#1d4f91" font-weight="600">Default VPC (172.31.0.0/16) · ap-south-1c</text>
+  <use href="#ec2" x="248" y="116"/>
+  <text x="300" y="130" class="h">Jenkins Server · healthai-project</text>
+  <text x="300" y="148" class="s">EC2 m7i-flex.large · Jenkins :8080 · Docker · kubectl · eksctl</text>
+
+  <g>
+    <rect x="300" y="168" width="180" height="46" rx="6" fill="#fff" stroke="#d24939"/>
+    <text x="390" y="187" text-anchor="middle" class="h">1 · Clone code</text>
+    <text x="390" y="204" text-anchor="middle" class="s">git checkout main</text>
+
+    <rect x="510" y="168" width="180" height="46" rx="6" fill="#fff" stroke="#d24939"/>
+    <text x="600" y="187" text-anchor="middle" class="h">2 · Build image</text>
+    <text x="600" y="204" text-anchor="middle" class="s">docker build -t $IMAGE:$TAG</text>
+
+    <rect x="720" y="168" width="180" height="46" rx="6" fill="#fff" stroke="#d24939"/>
+    <text x="810" y="187" text-anchor="middle" class="h">3 · Push image</text>
+    <text x="810" y="204" text-anchor="middle" class="s">docker login · push</text>
+
+    <rect x="930" y="168" width="200" height="46" rx="6" fill="#fff" stroke="#d24939"/>
+    <text x="1030" y="187" text-anchor="middle" class="h">4 · Deploy to EKS</text>
+    <text x="1030" y="204" text-anchor="middle" class="s">sed tag · kubectl apply</text>
+  </g>
+  <path class="ar" d="M480,191 L508,191"/>
+  <path class="ar" d="M690,191 L718,191"/>
+  <path class="ar" d="M900,191 L928,191"/>
+
+  <!-- ===================== EKS VPC ===================== -->
+  <rect x="230" y="255" width="700" height="565" rx="6" fill="#f2f7fd" stroke="#5a8dd6"/>
+  <text x="244" y="274" class="t" fill="#1d4f91" font-weight="600">VPC (192.168.0.0/16) · eksctl-cluster01-cluster</text>
+
+  <!-- Public subnets -->
+  <rect x="255" y="288" width="650" height="310" rx="6" fill="#fdf5ea" stroke="#e8a65a"/>
+  <text x="268" y="306" class="t" fill="#9a5a12" font-weight="600">Public Subnets · ap-south-1a / 1b / 1c</text>
+
+  <!-- Classic LB -->
+  <use href="#elb" x="355" y="430"/>
+  <text x="355" y="470" text-anchor="middle" class="h">Classic Load</text>
+  <text x="355" y="485" text-anchor="middle" class="h">Balancer</text>
+  <text x="355" y="501" text-anchor="middle" class="s">healthai-service</text>
+  <text x="355" y="515" text-anchor="middle" class="s">port 80</text>
+
+  <!-- Node group ASG -->
+  <rect x="425" y="320" width="350" height="258" rx="6" fill="#fffaf3" stroke="#ed7100"/>
+  <use href="#asg" x="435" y="329"/>
+  <text x="458" y="342" class="h">EKS Node Group ASG</text>
+  <text x="602" y="342" class="s">min 2 · desired 2 · max 2</text>
+
+  <!-- node 1a -->
+  <rect x="440" y="356" width="155" height="208" rx="6" fill="#fff" stroke="#d5dbdb"/>
+  <use href="#ec2" x="497" y="366"/>
+  <text x="517" y="424" text-anchor="middle" class="h">Worker Node · AZ-1a</text>
+  <text x="517" y="440" text-anchor="middle" class="s">c7i-flex.large · AL2023</text>
+  <rect x="452" y="452" width="131" height="98" rx="6" fill="#eef3ff" stroke="#326ce5"/>
+  <text x="517" y="473" text-anchor="middle" class="h" fill="#1b3f9c">Pod</text>
+  <text x="517" y="491" text-anchor="middle" class="t">healthai-deploy</text>
+  <text x="517" y="508" text-anchor="middle" class="s">Streamlit app</text>
+  <text x="517" y="524" text-anchor="middle" class="s">containerPort 8501</text>
+
+  <!-- node 1b -->
+  <rect x="607" y="356" width="155" height="208" rx="6" fill="#fff" stroke="#d5dbdb"/>
+  <use href="#ec2" x="664" y="366"/>
+  <text x="684" y="424" text-anchor="middle" class="h">Worker Node · AZ-1b</text>
+  <text x="684" y="440" text-anchor="middle" class="s">c7i-flex.large · AL2023</text>
+  <rect x="619" y="452" width="131" height="98" rx="6" fill="#eef3ff" stroke="#326ce5"/>
+  <text x="684" y="473" text-anchor="middle" class="h" fill="#1b3f9c">Pod</text>
+  <text x="684" y="491" text-anchor="middle" class="t">healthai-deploy</text>
+  <text x="684" y="508" text-anchor="middle" class="s">Streamlit app</text>
+  <text x="684" y="524" text-anchor="middle" class="s">containerPort 8501</text>
+
+  <!-- NAT -->
+  <use href="#nat" x="845" y="430"/>
+  <text x="845" y="400" text-anchor="middle" class="h">NAT Gateway</text>
+  
+
+  <!-- Private subnets -->
+  <rect x="255" y="622" width="650" height="176" rx="6" fill="#fbf0fc" stroke="#c86dd7"/>
+  <text x="268" y="640" class="t" fill="#8a2a99" font-weight="600">Private Subnets · ap-south-1a / 1b / 1c</text>
+
+  <rect x="285" y="664" width="180" height="64" rx="6" fill="#fff" stroke="#c86dd7"/>
+  <text x="375" y="690" text-anchor="middle" class="h">Private Subnet · AZ-1a</text>
+  <text x="375" y="708" text-anchor="middle" class="s">route → NAT Gateway</text>
+  <rect x="490" y="664" width="180" height="64" rx="6" fill="#fff" stroke="#c86dd7"/>
+  <text x="580" y="690" text-anchor="middle" class="h">Private Subnet · AZ-1b</text>
+  <text x="580" y="708" text-anchor="middle" class="s">route → NAT Gateway</text>
+  <rect x="695" y="664" width="180" height="64" rx="6" fill="#fff" stroke="#c86dd7"/>
+  <text x="785" y="690" text-anchor="middle" class="h">Private Subnet · AZ-1c</text>
+  <text x="785" y="708" text-anchor="middle" class="s">route → NAT Gateway</text>
+
+  <text x="580" y="756" text-anchor="middle" class="s">Created by eksctl for private workloads.</text>
+  <text x="580" y="774" text-anchor="middle" class="s">The node group runs in the public subnets, so these are currently empty.</text>
+
+  <!-- Internet Gateway on VPC edge -->
+  <use href="#igw" x="230" y="430"/>
+  <text x="252" y="404" class="h">Internet Gateway</text>
+  
+
+  <!-- ===================== RIGHT COLUMN ===================== -->
+  <!-- EKS control plane -->
+  <rect x="955" y="288" width="255" height="110" rx="6" fill="#fff" stroke="#ed7100"/>
+  <rect x="968" y="302" width="40" height="40" rx="4" fill="url(#gOr)"/>
+  <text x="988" y="327" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">EKS</text>
+  <text x="1018" y="318" class="h">Amazon EKS · cluster01</text>
+  <text x="1018" y="335" class="s">Managed control plane</text>
+  <text x="968" y="364" class="s">Kubernetes API server, scheduler, etcd</text>
+  <text x="968" y="380" class="s">(run by AWS, outside your VPC)</text>
+
+  <!-- K8s objects -->
+  <rect x="955" y="420" width="255" height="200" rx="6" fill="#f7f9ff" stroke="#326ce5" stroke-dasharray="5 3"/>
+  <text x="968" y="440" class="t" fill="#1b3f9c" font-weight="600">Kubernetes · namespace default</text>
+  <rect x="968" y="452" width="229" height="50" rx="5" fill="#fff" stroke="#326ce5"/>
+  <text x="980" y="472" class="h">Deployment · healthai-deploy</text>
+  <text x="980" y="490" class="s">2 replicas · rolling update per build</text>
+  <rect x="968" y="510" width="229" height="50" rx="5" fill="#fff" stroke="#326ce5"/>
+  <text x="980" y="530" class="h">Service · healthai-service</text>
+  <text x="980" y="548" class="s">LoadBalancer · 80 → 31439 → 8501</text>
+  <rect x="968" y="568" width="229" height="40" rx="5" fill="#fff" stroke="#326ce5"/>
+  <text x="980" y="592" class="s">selector app: healthAI → 2 pods</text>
+
+  <!-- CloudFormation -->
+  <rect x="955" y="642" width="255" height="90" rx="6" fill="#fff" stroke="#e7157b"/>
+  <rect x="968" y="656" width="34" height="34" rx="4" fill="#e7157b"/>
+  <path d="M976 664h18M976 672h18M976 680h12" stroke="#fff" stroke-width="2"/>
+  <text x="1012" y="670" class="h">AWS CloudFormation</text>
+  <text x="1012" y="686" class="s">eksctl stacks</text>
+  <text x="968" y="712" class="s">cluster + VPC + node group</text>
+
+  <!-- ===================== ARROWS ===================== -->
+  <!-- Developer -> GitHub -->
+  <path class="ar" d="M100,118 L100,158"/>
+  <text x="108" y="142" class="l">git push</text>
+
+  <!-- GitHub -> Jenkins clone -->
+  <path class="ar" d="M165,191 L298,191"/>
+  <text x="208" y="184" class="l">clone</text>
+
+  <!-- Push -> Docker Hub -->
+  <path class="ab" d="M810,214 L810,242 L120,242 L120,270"/>
+  <text x="560" y="238" class="l" fill="#2563eb">docker push</text>
+
+  <!-- Deploy -> EKS control plane -->
+  <path class="ar" d="M1080,214 L1080,286"/>
+  <text x="1088" y="254" class="l">kubectl apply</text>
+
+  <!-- Control plane -> node group -->
+  <path class="ar" d="M955,348 L777,348"/>
+  <text x="800" y="340" class="l">schedules pods</text>
+
+  <!-- K8s objects describe pods -->
+  <path class="ab" d="M955,476 L777,476"/>
+  <text x="866" y="468" class="l" fill="#2563eb">desired state</text>
+
+  <!-- Users -> IGW -> LB -> ASG -->
+  <path class="ar" d="M140,430 L210,430"/>
+  <text x="150" y="422" class="l">HTTP :80</text>
+  <path class="ar" d="M248,430 L331,430"/>
+  <path class="ar" d="M377,430 L423,430"/>
+  <text x="381" y="422" class="l">31439</text>
+
+  <!-- private -> NAT -->
+  <path class="ap" d="M845,664 L845,450"/>
+  <text x="852" y="610" class="l" fill="#9333ea">outbound</text>
+
+  <!-- nodes outbound via IGW -> Docker Hub / OpenRouter -->
+  <path class="ab" d="M425,560 L300,560 L240,448"/>
+  <text x="290" y="578" class="l" fill="#2563eb">outbound via IGW</text>
+  <path class="ab" d="M216,414 L216,305 L167,305"/>
+  <text x="210" y="390" class="l" fill="#2563eb" transform="rotate(-90 210 390)">image pull</text>
+  <path class="ap" d="M216,448 L216,571 L167,571"/>
+  <text x="210" y="540" class="l" fill="#9333ea" transform="rotate(-90 210 540)">LLM API</text>
+</svg>
