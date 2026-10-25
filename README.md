@@ -8,7 +8,7 @@ A Streamlit-based AI health assistant (voice + text) powered by OpenRouter (`ope
 
 ## 🏗️ Architecture
 
-![Architecture](images/architecture.svg)
+![Architecture](screenshot/architecture.jpeg)
 
 **Flow:** Developer pushes to GitHub → Jenkins (EC2) clones, builds and pushes the Docker image to Docker Hub → `kubectl apply` deploys to EKS → a Classic Load Balancer exposes the Streamlit app to users → the app calls the OpenRouter API for LLM responses.
 
@@ -37,7 +37,7 @@ The pipeline (`healthai-bot`, build #9) has four stages:
 3. **Push image** – pushes `healthai-bot:<BUILD_NUMBER>` to Docker Hub
 4. **Deploy to EKS** – updates the image tag in `menifest/deployment.yml` with `sed`, applies `deployment.yml` and `service.yml`, then runs `kubectl rollout status deployment --timeout=120s`
 
-![Jenkins Pipeline](images/jenkin-pipeline.jpg)
+![Jenkins Pipeline](screenshot/jenkin-pipeline.jpg)
 
 ---
 
@@ -45,7 +45,7 @@ The pipeline (`healthai-bot`, build #9) has four stages:
 
 Cluster `cluster01` in `ap-south-1` with a managed node group (2 × `c7i-flex.large`). The deployment runs 2 replicas behind a `LoadBalancer` service (port 80 → NodePort 31439 → container port 8501).
 
-![EKS Cluster](images/eks-cluster.jpg)
+![EKS Cluster](screenshot/eks-cluster.jpg)
 
 ---
 
@@ -53,7 +53,7 @@ Cluster `cluster01` in `ap-south-1` with a managed node group (2 × `c7i-flex.la
 
 Three instances are running: the Jenkins server (`healthai-project`, `m7i-flex.large`, ap-south-1c) and two EKS worker nodes (`c7i-flex.large`, ap-south-1a and ap-south-1b).
 
-![EC2 Instances](images/instances.jpg)
+![EC2 Instances](screenshot/instances.jpg)
 
 ---
 
@@ -61,7 +61,7 @@ Three instances are running: the Jenkins server (`healthai-project`, `m7i-flex.l
 
 The EKS node group is backed by an Auto Scaling Group (min 2, desired 2, max 2) – 2/2 instances healthy.
 
-![Auto Scaling Group](images/autoscaling.jpg)
+![Auto Scaling Group](screenshot/autoscaling.jpg)
 
 ---
 
@@ -69,7 +69,7 @@ The EKS node group is backed by an Auto Scaling Group (min 2, desired 2, max 2) 
 
 `eksctl` created a VPC with 6 subnets (public + private in each of 1a, 1b, 1c), 5 route tables, an Internet Gateway and a NAT Gateway.
 
-![VPC Workflow](images/vpc-workflow.jpg)
+![VPC Workflow](screenshot/vpc-workflow.jpg)
 
 ---
 
@@ -77,7 +77,7 @@ The EKS node group is backed by an Auto Scaling Group (min 2, desired 2, max 2) 
 
 A Classic Load Balancer spanning 3 Availability Zones is created automatically by the Kubernetes `LoadBalancer` service.
 
-![Load Balancer](images/load-balancer.jpg)
+![Load Balancer](screenshot/load-balancer.jpg)
 
 ---
 
@@ -85,7 +85,7 @@ A Classic Load Balancer spanning 3 Availability Zones is created automatically b
 
 The app is reachable through the load balancer DNS name. It offers a voice input ("Tap to Speak"), a text box, and optional info cards for Diet / Exercise / Symptoms.
 
-![Application View](images/application-view.jpg)
+![Application View](screenshot/application-view.jpg)
 
 ---
 
