@@ -8,7 +8,7 @@ A Streamlit-based AI health assistant (voice + text) powered by OpenRouter (`ope
 
 ## 🏗️ Architecture
 
-![Architecture](screenshot/architecture.jpeg)
+![Architecture](screenshot/architecture.jpg)
 
 **Flow:** Developer pushes to GitHub → Jenkins (EC2) clones, builds and pushes the Docker image to Docker Hub → `kubectl apply` deploys to EKS → a Classic Load Balancer exposes the Streamlit app to users → the app calls the OpenRouter API for LLM responses.
 
